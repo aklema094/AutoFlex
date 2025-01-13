@@ -6,18 +6,18 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.DriverManager;
 
-
 public class AutoFlex {
 
-    public static void main(String[] args) throws SQLException, ClassNotFoundException, InterruptedException{
+    public static void main(String[] args) throws SQLException, ClassNotFoundException, InterruptedException {
         Scanner sc = new Scanner(System.in);
         final String url = "jdbc:mysql://localhost:3306/autoflex";
         final String userName = "root";
         final String password = "29344";
         Class.forName("com.mysql.cj.jdbc.Driver");
-        
-        Connection con = DriverManager.getConnection(url,userName,password);
-        
+
+        Connection con = DriverManager.getConnection(url, userName, password);
+        SignUp signUp = new SignUp(con, sc);
+
         while (true) {
             System.out.println("           WELCOME TO AUTOFLEX");
             System.out.println("=========================================");
@@ -26,30 +26,32 @@ public class AutoFlex {
             System.out.println("3. Exit");
             System.out.print("Enter your choice : ");
             int ch = sc.nextInt();
-            switch(ch){
+            switch (ch) {
                 case 1:
-                    // userLogin();
+                    //userLogin(con,sc);
                     break;
                 case 2:
-                    // userRegistration();
+                    signUp.userRegistration();
+                    System.out.println("");
                     break;
                 case 3:
                     exit("Existing System");
                     return;
-                default :
+                default:
                     System.out.println("Invalid Choice!!!!\n");
             }
-            
+
         }
     }
+
     // existing from system
-    public static void exit(String s) throws InterruptedException{
+    public static void exit(String s) throws InterruptedException {
         System.out.print(s);
         for (int i = 0; i < 7; i++) {
             System.out.print(". ");
             Thread.sleep(250);
         }
         System.out.println("");
-    } 
+    }
 
 }
