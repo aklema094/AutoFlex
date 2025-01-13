@@ -1,20 +1,55 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
- */
 package autoflex;
 
-/**
- *
- * @author user
- */
+import java.sql.SQLException;
+import java.util.Scanner;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.DriverManager;
+
+
 public class AutoFlex {
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        // TODO code application logic here
+    public static void main(String[] args) throws SQLException, ClassNotFoundException, InterruptedException{
+        Scanner sc = new Scanner(System.in);
+        final String url = "jdbc:mysql://localhost:3306/autoflex";
+        final String userName = "root";
+        final String password = "29344";
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        
+        Connection con = DriverManager.getConnection(url,userName,password);
+        
+        while (true) {
+            System.out.println("           WELCOME TO AUTOFLEX");
+            System.out.println("=========================================");
+            System.out.println("1. Log In");
+            System.out.println("2. Sign Up");
+            System.out.println("3. Exit");
+            System.out.print("Enter your choice : ");
+            int ch = sc.nextInt();
+            switch(ch){
+                case 1:
+                    // userLogin();
+                    break;
+                case 2:
+                    // userRegistration();
+                    break;
+                case 3:
+                    exit("Existing System");
+                    return;
+                default :
+                    System.out.println("Invalid Choice!!!!\n");
+            }
+            
+        }
     }
-    
+    // existing from system
+    public static void exit(String s) throws InterruptedException{
+        System.out.print(s);
+        for (int i = 0; i < 7; i++) {
+            System.out.print(". ");
+            Thread.sleep(250);
+        }
+        System.out.println("");
+    } 
+
 }
