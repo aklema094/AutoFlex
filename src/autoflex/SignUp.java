@@ -7,15 +7,14 @@ import java.sql.SQLException;
 import java.sql.ResultSet;
 
 public class SignUp {
-
+    
     private Connection con;
     private Scanner sc;
-
+    
     SignUp(Connection con, Scanner sc) {
         this.con = con;
         this.sc = sc;
     }
-
     // new User registration 
     public void userRegistration() throws SQLException {
         sc.nextLine();
@@ -50,9 +49,8 @@ public class SignUp {
         }
 
     }
-
+    // check user exist or not in database
     public boolean isUserExist(String email) throws SQLException {
-
         PreparedStatement p = con.prepareStatement("Select * from users WHERE email = ?;");
         p.setString(1, email);
         ResultSet rs = p.executeQuery();
@@ -61,5 +59,4 @@ public class SignUp {
         }
         return false;
     }
-
 }

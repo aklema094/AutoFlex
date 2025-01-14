@@ -3,7 +3,6 @@ package autoflex;
 import java.sql.SQLException;
 import java.util.Scanner;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.DriverManager;
 
 public class AutoFlex {
@@ -17,6 +16,7 @@ public class AutoFlex {
 
         Connection con = DriverManager.getConnection(url, userName, password);
         SignUp signUp = new SignUp(con, sc);
+        LogIn log = new LogIn(con,sc);
 
         while (true) {
             System.out.println("           WELCOME TO AUTOFLEX");
@@ -28,7 +28,8 @@ public class AutoFlex {
             int ch = sc.nextInt();
             switch (ch) {
                 case 1:
-                    //userLogin(con,sc);
+                    log.userLogin();
+                    System.out.println("");
                     break;
                 case 2:
                     signUp.userRegistration();
