@@ -7,7 +7,6 @@ import java.sql.ResultSet;
 import java.sql.PreparedStatement;
 
 public class LogIn {
-
     Scanner sc;
     Connection con;
 
@@ -27,7 +26,6 @@ public class LogIn {
         ps.setString(1, email);
         ps.setString(2, password);
         ResultSet rs = ps.executeQuery();
-
         if (rs.next()) {
             System.out.println("Log in sucessfully " + rs.getString("name"));
 
@@ -45,8 +43,8 @@ public class LogIn {
 
     // admin menu 
     public void adminMenu() {
+        Employee emp = new Employee(con,sc);
         sc.nextLine();
-
         while (true) {
             System.out.println("=================Admin Menu==================");
             System.out.println("============================================");
@@ -61,7 +59,6 @@ public class LogIn {
             System.out.println("============================================");
             System.out.print("Enter youe choice : ");
             int ch = sc.nextInt();
-
             if (ch == 0) {
                 return;
             }
@@ -74,6 +71,7 @@ public class LogIn {
                         ch = sc.nextInt();
                         break;
                     case 2:
+                        emp.setDetails();
                         System.out.println();
                         System.out.println("2].ADD NEW EMPLOYEE");
                         System.out.println("9].GO BACK TO MAIN MENU");

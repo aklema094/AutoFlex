@@ -5,6 +5,15 @@ import java.util.Scanner;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
+
+interface Utility {
+
+    public void getDetails();
+    
+    public void setDetails();
+    
+}
+
 public class AutoFlex {
 
     public static void main(String[] args) throws SQLException, ClassNotFoundException, InterruptedException {
