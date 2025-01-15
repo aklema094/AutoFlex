@@ -3,6 +3,7 @@ package autoflex;
 import java.sql.Connection;
 import java.util.Scanner;
 import java.sql.SQLException;
+import java.sql.ResultSet;
 import java.util.UUID;
 import java.sql.PreparedStatement;
 
@@ -20,7 +21,22 @@ public class Employee implements Utility {
 
     @Override
     public void getDetails() {
-    
+        try (PreparedStatement p = con.prepareStatement("select * from employees;")) {
+            ResultSet rs = p.executeQuery();
+            System.out.println("+---------------------------------------+----------------+-----+------------------------+");
+            System.out.println("|                   id                  |      name      | age |       department       |");
+            System.out.println("+---------------------------------------+----------------+-----+------------------------+");
+            while (rs.next()) {
+                String id = rs.getString("id");
+                String name = rs.getString("name");
+                int age = rs.getInt("age");
+                String dep = rs.getString("department");
+                System.out.printf("| %-38s| %-15s| %-4s| %-23s|\n", id, name, age, dep);
+            }
+            System.out.println("+---------------------------------------+----------------+-----+------------------------+");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -42,15 +58,14 @@ public class Employee implements Utility {
             ps.setInt(3, age);
             ps.setString(4, dep);
             int r = ps.executeUpdate();
-            if(r>0){
+            if (r > 0) {
                 System.out.println("Employee added successfull");
-            }else{
+            } else {
                 System.out.println("Failed to add employee");
             }
-            
-         
+
         } catch (SQLException e) {
-            
+
             e.printStackTrace();
 
         }
