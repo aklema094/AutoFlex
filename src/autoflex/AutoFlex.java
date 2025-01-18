@@ -17,6 +17,7 @@ interface Utility {
 public class AutoFlex {
 
     public static void main(String[] args) throws SQLException, ClassNotFoundException, InterruptedException {
+        
         Scanner sc = new Scanner(System.in);
         final String url = "jdbc:mysql://localhost:3306/autoflex";
         final String userName = "root";
@@ -53,7 +54,6 @@ public class AutoFlex {
 
         }
     }
-
     // existing from system
     public static void exit(String s) throws InterruptedException {
         System.out.print(s);

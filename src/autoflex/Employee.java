@@ -13,7 +13,8 @@ public class Employee implements Utility {
     Connection con;
     String id, name, dep;
     int age;
-
+    
+   
     Employee(Connection con, Scanner sc) {
         this.con = con;
         this.sc = sc;

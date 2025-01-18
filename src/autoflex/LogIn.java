@@ -44,15 +44,17 @@ public class LogIn {
     // admin menu 
     public void adminMenu() {
         Employee emp = new Employee(con,sc);
+        Car car = new Car(con,sc);
+        Showroom sh = new Showroom(con,sc);
         sc.nextLine();
         while (true) {
             System.out.println("=================Admin Menu==================");
             System.out.println("============================================");
-            System.out.println("1. Add new Showroom");
-            System.out.println("2. Add new Employee");
+            System.out.println("1. Add new Showroom");//done
+            System.out.println("2. Add new Employee");//done
             System.out.println("3. Add new car");
-            System.out.println("4. View all Showroom");
-            System.out.println("5. view all Employee");
+            System.out.println("4. View all Showroom");//dpne
+            System.out.println("5. view all Employee");//done
             System.out.println("6. view all available Car");
             System.out.println("7. view all Rental Car");
             System.out.println("0. Exit");
@@ -65,6 +67,7 @@ public class LogIn {
             while (ch != 9) {
                 switch (ch) {
                     case 1:
+                        sh.setDetails();
                         System.out.println();
                         System.out.println("1].ADD NEW SHOWROOM");
                         System.out.println("9].GO BACK TO MAIN MENU");
@@ -78,18 +81,21 @@ public class LogIn {
                         ch = sc.nextInt();
                         break;
                     case 3:
+                        car.setDetails();
                         System.out.println();
                         System.out.println("3].ADD NEW CAR");
                         System.out.println("9].GO BACK TO MAIN MENU");
                         ch = sc.nextInt();
                         break;
                     case 4:
+                        sh.getDetails();
                         System.out.println();
                         System.out.println("9].GO BACK TO MAIN MENU");
                         System.out.println("0].EXIT");
                         ch = sc.nextInt();
                         break;
                     case 5:
+                        emp.getDetails();
                         System.out.println();
                         System.out.println("9].GO BACK TO MAIN MENU");
                         System.out.println("0].EXIT");
