@@ -12,15 +12,42 @@ public class Car implements Utility {
     Scanner sc;
     String id, brand, model, vin, fuel;
     int year;
+
     Car(Connection con, Scanner sc) {
         this.con = con;
         this.sc = sc;
 
     }
+
     @Override
     public void getDetails() {
 
+        try (PreparedStatement ps = con.prepareStatement("select * from  car_information ;")) {
+
+            ResultSet rs = ps.executeQuery();
+            System.out.println("+----+--------------+---------------+------+----------+---------------+--------+");
+            System.out.println("| id |    brand     |     model     | year | vin      |    fueltype   |  status|");
+            System.out.println("+----+--------------+---------------+------+----------+---------------+--------+");
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String br = rs.getString("brand");
+                String mod = rs.getString("model");
+                int yr = rs.getInt("year");
+                String v = rs.getString("vin");
+                String fu = rs.getString("fueltype");
+                boolean s = rs.getBoolean("status");
+                if(s){
+                System.out.printf("|  %-2s| %-13s| %-14s| %-5s| %-9s| %-14s| %-7s|\n",id,br,mod,yr,v,fu,"Yes");
+                }
+            }
+            System.out.println("+----+--------------+---------------+------+----------+---------------+--------+");
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
     }
+
     @Override
     public void setDetails() {
         sc.nextLine();
@@ -35,7 +62,7 @@ public class Car implements Utility {
         vin = sc.nextLine();
         System.out.print("Enter Fuel type : ");
         fuel = sc.nextLine();
-        
+
         try (PreparedStatement ps = con.prepareStatement("insert into Car_Information (brand,model,year,vin,fueltype,status) values(?,?,?,?,?,?);")) {
             ps.setString(1, brand);
             ps.setString(2, model);
