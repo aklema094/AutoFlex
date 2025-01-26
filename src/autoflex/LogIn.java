@@ -14,8 +14,10 @@ public class LogIn {
         this.con = con;
         this.sc = sc;
     }
+         
 
     public void userLogin() throws SQLException {
+        
         sc.nextLine();
         System.out.print("Enter your email : ");
         String email = sc.nextLine();
@@ -33,19 +35,20 @@ public class LogIn {
                 // admin menu 
                 adminMenu();
             } else {
-                // user menu 
+                userMenu();
             }
         } else {
             System.out.println("Failed to login!!! Invalid email or password.");
         }
 
     }
-
-    // admin menu 
-    public void adminMenu() {
         Employee emp = new Employee(con,sc);
         Car car = new Car(con,sc);
         Showroom sh = new Showroom(con,sc);
+
+    // admin menu 
+    public void adminMenu() {
+     
         sc.nextLine();
         while (true) {
             System.out.println("=================Admin Menu==================");
@@ -102,10 +105,60 @@ public class LogIn {
                         ch = sc.nextInt();
                         break;
                     case 6:
+                        car.getDetails();
                         System.out.println();
                         System.out.println("9].GO BACK TO MAIN MENU");
                         System.out.println("0].EXIT");
                         ch = sc.nextInt();
+                        break;
+                    case 0:
+                        return;
+                    default:
+                        System.out.println("Inavlid Choice!!!");
+                        break;
+                }
+            }
+        }
+    }
+    
+    
+    public void userMenu(){
+        
+        while(true){
+             System.out.println("=================User Menu==================");
+            System.out.println("============================================");
+            System.out.println("1. View Abailable product");//done
+            System.out.println("2. Rent a Car");//done
+            System.out.println("3. Return car");
+            System.out.println("4. Rental History");//dpne
+            System.out.println("0. Exit");
+            System.out.println("============================================");    
+             int ch = sc.nextInt();
+            if (ch == 0) {
+                return;
+            }
+            while (ch != 9) {
+                switch (ch) {
+                    case 1:
+                        car.getDetails();
+                        System.out.println();
+                        System.out.println("9].GO BACK TO MAIN MENU");
+                        System.out.println("0].EXIT");
+                        ch = sc.nextInt();
+                        break;
+                    case 2:
+                        System.out.println();
+                        System.out.println("2].RENT ANOTHER CAR");
+                        System.out.println("9].GO BACK TO MAIN MENU");
+                        ch = sc.nextInt();
+                        break;
+                    case 3:
+                        System.out.println("9].GO BACK TO MAIN MENU");
+                        ch = sc.nextInt();
+                        break;
+                    case 4:
+                
+
                         break;
                     case 0:
                         return;
