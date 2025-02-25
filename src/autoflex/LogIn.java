@@ -122,7 +122,7 @@ public class LogIn{
     }
     
     
-    public void userMenu(){
+    public void userMenu() throws SQLException{
         
         while(true){
              System.out.println("=================User Menu==================");
@@ -147,6 +147,7 @@ public class LogIn{
                         ch = sc.nextInt();
                         break;
                     case 2:
+                        rentCar();
                         System.out.println();
                         System.out.println("2].RENT ANOTHER CAR");
                         System.out.println("9].GO BACK TO MAIN MENU");
@@ -168,6 +169,18 @@ public class LogIn{
                 }
             }
         }
+    }
+
+    private void rentCar() throws SQLException {
+       sc.nextLine();
+       System.out.print("Enter your name : ");
+       String name = sc.nextLine();
+       car.getDetails();
+       System.out.print("\nEnter the Bike Id you want to Get : ");
+       String id = sc.nextLine();
+  
+       
+   
     }
 
 }

@@ -1,13 +1,19 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package autoflex;
 
-/**
- *
- * @author user
- */
 public class Customer {
+      private String cusId;
+    private String name;
     
+    Customer(String c,String n){
+        this.cusId = c;
+        this.name = n;
+    }
+    
+    public String getCustomerId(){
+        return cusId;
+    }
+    public String getCustomerName(){
+        return name;
+    }
 }
