@@ -12,6 +12,10 @@ public class Car implements Utility {
     Scanner sc;
     String id, brand, model, vin, fuel;
     int year;
+    
+    String bikeId;
+    private Customer customer;
+    private int days;
 
     Car(Connection con, Scanner sc) {
         this.con = con;
@@ -82,5 +86,6 @@ public class Car implements Utility {
         }
 
     }
+    // 
 
 }

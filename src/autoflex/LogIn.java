@@ -6,7 +6,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.PreparedStatement;
 
-public class LogIn {
+public class LogIn{
     Scanner sc;
     Connection con;
 
@@ -55,10 +55,10 @@ public class LogIn {
             System.out.println("============================================");
             System.out.println("1. Add new Showroom");//done
             System.out.println("2. Add new Employee");//done
-            System.out.println("3. Add new car");
-            System.out.println("4. View all Showroom");//dpne
+            System.out.println("3. Add new car");//done
+            System.out.println("4. View all Showroom");//done
             System.out.println("5. view all Employee");//done
-            System.out.println("6. view all available Car");
+            System.out.println("6. view all available Car");//done
             System.out.println("7. view all Rental Car");
             System.out.println("0. Exit");
             System.out.println("============================================");
@@ -128,7 +128,7 @@ public class LogIn {
              System.out.println("=================User Menu==================");
             System.out.println("============================================");
             System.out.println("1. View Abailable product");//done
-            System.out.println("2. Rent a Car");//done
+            System.out.println("2. Rent a Car");
             System.out.println("3. Return car");
             System.out.println("4. Rental History");//dpne
             System.out.println("0. Exit");
