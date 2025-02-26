@@ -170,17 +170,56 @@ public class LogIn{
             }
         }
     }
-
+    // rent car
     private void rentCar() throws SQLException {
+       sc.nextLine();
+       System.out.print("Enter your Id : ");
+       int userId = sc.nextInt();
+       String q = "Select * from users WHERE id = ?;" ;
+        while(!isExist(userId,q)){
+           System.out.println("Enter valid user Id");
+           userId = sc.nextInt();
+       }
        sc.nextLine();
        System.out.print("Enter your name : ");
        String name = sc.nextLine();
        car.getDetails();
-       System.out.print("\nEnter the Bike Id you want to Get : ");
-       String id = sc.nextLine();
-  
+       System.out.print("\nEnter the Car Id you want to Get : ");
+       int carId = sc.nextInt();
+       q = "select id from car_information WHERE id = ? ;";
+       while(!isExist(carId,q)){
+           System.out.println("Enter valid Car Id");
+           carId = sc.nextInt();
+       }
+       System.out.print("Enter the number of rental days : ");
+       int totalRentalDays = sc.nextInt();
        
-   
+       PreparedStatement pre = con.prepareStatement("insert into rentinformation(carId,customarId,customarName,totalDays) values(?,?,?,?)");
+       pre.setInt(1, carId);
+        pre.setInt(2, userId);
+        pre.setString(3, name);
+        pre.setInt(4,totalRentalDays);
+        
+        int r = pre.executeUpdate();
+        if(r>0){
+            System.out.println("Rent a car successfully");
+        }else{
+            System.out.println("Failed to rent a car!! Try again");
+        }
+       
+  
     }
-
+   // check information is exist or not
+    private boolean isExist(int id, String query) throws SQLException {
+        
+         PreparedStatement p = con.prepareStatement(query);
+         p.setInt(1, id);
+         ResultSet rs = p.executeQuery();
+         if (rs.next()) {
+            return true;
+         }
+        return false;
+    }
+    
+    
 }
