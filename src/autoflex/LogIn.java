@@ -9,14 +9,19 @@ import java.sql.PreparedStatement;
 public class LogIn{
     Scanner sc;
     Connection con;
-
+    Employee emp ;
+    Car car;
+    Showroom sh;
     LogIn(Connection con, Scanner sc) {
         this.con = con;
         this.sc = sc;
-    }
-         
-
+    } 
+    
     public void userLogin() throws SQLException {
+        
+         emp = new Employee(con,sc);
+         car = new Car(con,sc);
+         sh = new Showroom(con,sc);
         
         sc.nextLine();
         System.out.print("Enter your email : ");
@@ -40,16 +45,16 @@ public class LogIn{
         } else {
             System.out.println("Failed to login!!! Invalid email or password.");
         }
-
+       if(con == null){
+            System.out.println("null connection");
+        }else{
+            System.out.println("not null");
+        }
     }
-        Employee emp = new Employee(con,sc);
-        Car car = new Car(con,sc);
-        Showroom sh = new Showroom(con,sc);
-
+    
     // admin menu 
     public void adminMenu() {
-     
-        sc.nextLine();
+   
         while (true) {
             System.out.println("=================Admin Menu==================");
             System.out.println("============================================");
@@ -123,17 +128,17 @@ public class LogIn{
     
     
     public void userMenu() throws SQLException{
-        
         while(true){
              System.out.println("=================User Menu==================");
             System.out.println("============================================");
-            System.out.println("1. View Abailable product");//done
+            System.out.println("1. View Available Car");//done
             System.out.println("2. Rent a Car");
             System.out.println("3. Return car");
             System.out.println("4. Rental History");//dpne
             System.out.println("0. Exit");
-            System.out.println("============================================");    
-             int ch = sc.nextInt();
+            System.out.println("============================================");   
+            System.out.print("Enter your Choice : ");
+            int ch = sc.nextInt();
             if (ch == 0) {
                 return;
             }
@@ -209,7 +214,7 @@ public class LogIn{
        
   
     }
-   // check information is exist or not
+   // check information is exist or not.
     private boolean isExist(int id, String query) throws SQLException {
         
          PreparedStatement p = con.prepareStatement(query);

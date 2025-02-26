@@ -13,15 +13,15 @@ public class Car implements Utility {
     String id, brand, model, vin, fuel;
     int year;
     
-    Car(Connection con, Scanner sc) {
-        this.con = con;
+    Car(Connection c, Scanner sc) {
+        this.con = c;
         this.sc = sc;
-
     }
+      
 
     @Override
     public void getDetails() {
-
+      
         try (PreparedStatement ps = con.prepareStatement("select * from  car_information ;")) {
 
             ResultSet rs = ps.executeQuery();
