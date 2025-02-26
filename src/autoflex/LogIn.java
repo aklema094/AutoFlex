@@ -188,7 +188,6 @@ public class LogIn{
        sc.nextLine();
        System.out.print("Enter your name : ");
        String name = sc.nextLine();
-       car.getDetails();
        System.out.print("\nEnter the Car Id you want to Get : ");
        int carId = sc.nextInt();
        q = "select id from car_information WHERE id = ? ;";
@@ -207,12 +206,21 @@ public class LogIn{
         
         int r = pre.executeUpdate();
         if(r>0){
-            System.out.println("Rent a car successfully");
+            PreparedStatement ps = con.prepareStatement("UPDATE car_information SET status = ? WHERE id = ?");
+           ps.setBoolean(1, false); 
+           ps.setInt(2, carId); 
+            int rs = ps.executeUpdate();
+            if(rs>0){
+                System.out.println("Rent a car successfully");
+            }
+            else{
+                System.out.println("Failed to rent a car!! Try again");
+                
+            }
         }else{
             System.out.println("Failed to rent a car!! Try again");
         }
        
-  
     }
    // check information is exist or not.
     private boolean isExist(int id, String query) throws SQLException {
