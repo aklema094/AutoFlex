@@ -6,15 +6,16 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.PreparedStatement;
 
-public class LogIn{
+public class LogIn extends RentCar{
     Scanner sc;
     Connection con;
     Employee emp ;
     Car car;
     Showroom sh;
-    LogIn(Connection con, Scanner sc) {
-        this.con = con;
-        this.sc = sc;
+    LogIn(Connection c, Scanner s) {
+        super(c,s); 
+        this.con = c;
+        this.sc = s;
     } 
     
     public void userLogin() throws SQLException {
@@ -132,7 +133,7 @@ public class LogIn{
              System.out.println("=================User Menu==================");
             System.out.println("============================================");
             System.out.println("1. View Available Car");//done
-            System.out.println("2. Rent a Car");
+            System.out.println("2. Rent a Car");//done
             System.out.println("3. Return car");
             System.out.println("4. Rental History");//dpne
             System.out.println("0. Exit");
@@ -152,7 +153,7 @@ public class LogIn{
                         ch = sc.nextInt();
                         break;
                     case 2:
-                        rentCar();
+                        rentACar();
                         System.out.println();
                         System.out.println("2].RENT ANOTHER CAR");
                         System.out.println("9].GO BACK TO MAIN MENU");
@@ -175,64 +176,7 @@ public class LogIn{
             }
         }
     }
-    // rent car
-    private void rentCar() throws SQLException {
-       sc.nextLine();
-       System.out.print("Enter your Id : ");
-       int userId = sc.nextInt();
-       String q = "Select * from users WHERE id = ?;" ;
-        while(!isExist(userId,q)){
-           System.out.println("Enter valid user Id");
-           userId = sc.nextInt();
-       }
-       sc.nextLine();
-       System.out.print("Enter your name : ");
-       String name = sc.nextLine();
-       System.out.print("\nEnter the Car Id you want to Get : ");
-       int carId = sc.nextInt();
-       q = "select id from car_information WHERE id = ? ;";
-       while(!isExist(carId,q)){
-           System.out.println("Enter valid Car Id");
-           carId = sc.nextInt();
-       }
-       System.out.print("Enter the number of rental days : ");
-       int totalRentalDays = sc.nextInt();
-       
-       PreparedStatement pre = con.prepareStatement("insert into rentinformation(carId,customarId,customarName,totalDays) values(?,?,?,?)");
-       pre.setInt(1, carId);
-        pre.setInt(2, userId);
-        pre.setString(3, name);
-        pre.setInt(4,totalRentalDays);
-        
-        int r = pre.executeUpdate();
-        if(r>0){
-            PreparedStatement ps = con.prepareStatement("UPDATE car_information SET status = ? WHERE id = ?");
-           ps.setBoolean(1, false); 
-           ps.setInt(2, carId); 
-            int rs = ps.executeUpdate();
-            if(rs>0){
-                System.out.println("Rent a car successfully");
-            }
-            else{
-                System.out.println("Failed to rent a car!! Try again");
-                
-            }
-        }else{
-            System.out.println("Failed to rent a car!! Try again");
-        }
-       
-    }
-   // check information is exist or not.
-    private boolean isExist(int id, String query) throws SQLException {
-        
-         PreparedStatement p = con.prepareStatement(query);
-         p.setInt(1, id);
-         ResultSet rs = p.executeQuery();
-         if (rs.next()) {
-            return true;
-         }
-        return false;
-    }
+    
     
     
 }
