@@ -85,8 +85,12 @@ public class RentCar {
             System.out.println("+----+--------------+---------------+-----------------+-----------+");
             while (rs.next()) {
                 int id = rs.getInt("id");
-              
-                //System.out.printf("|  %-2s| %-13s| %-14s| %-5s| %-9s| %-14s| %-7s|\n",id,br,mod,yr,v,fu,"Yes");
+                int cId = rs.getInt("carId");
+                int cusId = rs.getInt("customarId");
+                String cName = rs.getString("customarName");
+                int td = rs.getInt("totalDays");
+                
+                System.out.printf("|  %-2s| %-13s| %-14s| %-16s| %-10s|\n",id,cId,cusId,cName,td);
                 
             }
              System.out.println("+----+--------------+---------------+-----------------+-----------+");

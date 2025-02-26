@@ -46,11 +46,6 @@ public class LogIn extends RentCar{
         } else {
             System.out.println("Failed to login!!! Invalid email or password.");
         }
-       if(con == null){
-            System.out.println("null connection");
-        }else{
-            System.out.println("not null");
-        }
     }
     
     // admin menu 
@@ -68,7 +63,7 @@ public class LogIn extends RentCar{
             System.out.println("7. view all Rental Car");
             System.out.println("0. Exit");
             System.out.println("============================================");
-            System.out.print("Enter youe choice : ");
+            System.out.print("Enter your choice : ");
             int ch = sc.nextInt();
             if (ch == 0) {
                 return;
@@ -113,6 +108,13 @@ public class LogIn extends RentCar{
                     case 6:
                         car.getDetails();
                         System.out.println();
+                        System.out.println("9].GO BACK TO MAIN MENU");
+                        System.out.println("0].EXIT");
+                        ch = sc.nextInt();
+                        break;
+                    case 7:
+                        viewAllRentalCar();
+                         System.out.println();
                         System.out.println("9].GO BACK TO MAIN MENU");
                         System.out.println("0].EXIT");
                         ch = sc.nextInt();
